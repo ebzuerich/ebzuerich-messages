@@ -10,5 +10,6 @@ func setupRouting() {
 	router.Use(cors.Default())
 
 	router.GET("/entry", indexEntries)
+	router.POST("/entry", createEntry)
 	router.Run()
 }
