@@ -16,9 +16,9 @@ func setupDatabase() {
 	}
 
 	if _, err := conn.Exec(`CREATE TABLE IF NOT EXISTS entry (
-id SERIAL PRIMARY KEY
-title varchar(100)
-email varchar(100)
+id SERIAL PRIMARY KEY,
+title varchar(100),
+email varchar(100),
 message text
 );`); err != nil {
 		log.Fatalf("Error creating database table: %q", err)
