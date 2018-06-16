@@ -14,7 +14,16 @@ type Entry struct {
 }
 
 func createEntry(c *gin.Context) {
+	var newEntryId int
+	err := conn.QueryRow(
+		"INSERT INTO entry(title, email, message) VALUE ($1, $2, $3) returning id;",
+		c.DefaultPostForm("title", "No title"),
+		c.DefaultPostForm("email", "No email"),
+		c.DefaultPostForm("message", "No message")).Scan(&newEntryId)
 
+	if err != nil {
+		log.Fatalf("Error while inserting entry: %q", err)
+	}
 }
 
 func indexEntries(c *gin.Context) {
