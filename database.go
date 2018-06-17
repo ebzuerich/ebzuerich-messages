@@ -20,7 +20,7 @@ id SERIAL PRIMARY KEY,
 title varchar(100),
 email varchar(100),
 message text,
-created_at timestampz NOT NULL DEFAULT NOW()
+created_at timestamptz NOT NULL DEFAULT NOW()
 );`); err != nil {
 		log.Fatalf("Error creating database table: %q", err)
 		return
