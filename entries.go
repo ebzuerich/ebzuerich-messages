@@ -6,10 +6,10 @@ import (
 )
 
 type Entry struct {
-	Id int
-	Title string
-	Email string
-	Message string
+	id int
+	title string
+	email string
+	message string
 
 }
 
@@ -40,7 +40,7 @@ func indexEntries(c *gin.Context) {
 		if err != nil {
 			log.Fatalf("Error while reading entries: %q", err)
 		}
-		entries = append(entries, Entry{Id: id, Title: title, Email: email, Message: message})
+		entries = append(entries, Entry{id: id, title: title, email: email, message: message})
 	}
 
 	c.JSON(200, entries)
