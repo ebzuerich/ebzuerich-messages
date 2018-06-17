@@ -36,7 +36,7 @@ func indexEntries(c *gin.Context) {
 	var id int
 	var title, email, message, createdAt string
 	for rows.Next() {
-		err := rows.Scan(&id, &title, &email, &message)
+		err := rows.Scan(&id, &title, &email, &message, &createdAt)
 		if err != nil {
 			log.Fatalf("Error while reading entries: %q", err)
 		}
