@@ -10,7 +10,7 @@ type Entry struct {
 	Title string `json:"title"`
 	Email string `json:"email"`
 	Message string `json:"message"`
-
+	CreatedAt string `json:"created_at"`
 }
 
 func createEntry(c *gin.Context) {
@@ -27,20 +27,20 @@ func createEntry(c *gin.Context) {
 }
 
 func indexEntries(c *gin.Context) {
-	rows, err := conn.Query("SELECT * FROM entry")
+	rows, err := conn.Query("SELECT * FROM entry ORDER BY created_at DESC")
 	if err != nil {
 		log.Fatalf("Error while quering entries: %q", err)
 	}
 
 	var entries []Entry
 	var id int
-	var title, email, message string
+	var title, email, message, createdAt string
 	for rows.Next() {
 		err := rows.Scan(&id, &title, &email, &message)
 		if err != nil {
 			log.Fatalf("Error while reading entries: %q", err)
 		}
-		entries = append(entries, Entry{Id: id, Title: title, Email: email, Message: message})
+		entries = append(entries, Entry{Id: id, Title: title, Email: email, Message: message, CreatedAt: createdAt})
 	}
 
 	c.JSON(200, entries)
